@@ -26,17 +26,8 @@ def create_report
 		puts "Today's date is: " + date_today 
 	end
 
-	# Print "sales seport" in ascii art
-	print_ascii_art_header("sales report")
-
-	# Print today's date
-	print_date
-
-	# Print "products" in ascii art
-	print_ascii_art_header("products")
-
-	setup_files
-
+		setup_files
+	def report_products
 	$toys_data["items"].each { |toy| 
 	    puts toy["title"] #prints name of the toy
 	    puts "**************************************"   #Saperator
@@ -60,12 +51,8 @@ def create_report
 
 	    puts "                                      " #Empty Line
 	    }
-	  
-
-
-	# Print "brands" in ascii art
-	print_ascii_art_header("brands")
-
+	  end
+	 	def report_brands
 	unique_brands = $toys_data["items"].map { |item| item["brand"] }.uniq
 	  unique_brands.each_with_index { |brand, index|
 	    puts " "
@@ -91,6 +78,26 @@ def create_report
 	      average_brand_disc = (1 - brand_sales / (full_actual_price*2).to_f)
 	      puts "Average Brand Price : #{average_brand_price.round(2)} USD"
 	}
+	end
+
+	# Print "sales seport" in ascii art
+	print_ascii_art_header("sales report")
+
+	# Print today's date
+	print_date
+
+	# Print "products" in ascii art
+	print_ascii_art_header("products")
+
+	#prints products part of the report
+	report_products
+
+	# Print "brands" in ascii art
+	print_ascii_art_header("brands")
+	
+	#prints brands part of the report
+	report_brands
+
 end
 
 create_report
