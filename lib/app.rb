@@ -11,8 +11,8 @@ puts "Today's date is: " + date_today
 def setup_files
 	path = File.join(File.dirname(__FILE__), '../data/products.json')
 	file = File.read(path)
-	toys_data = JSON.parse(file)
-	report_file = File.new("report.txt", "w+")
+	$toys_data = JSON.parse(file)
+	$report_file = File.new("report.txt", "w+")
 end
 
 puts"  /$$$$$$            /$$                           /$$$$$$$                                            /$$ "   
