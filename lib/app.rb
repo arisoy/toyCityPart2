@@ -1,4 +1,5 @@
 require 'json'
+require 'artii'
 
 
 
@@ -7,31 +8,24 @@ require 'date'
 current_time = DateTime.now
 date_today = current_time.strftime "%d/%m/%Y"
 puts "Today's date is: " + date_today 
- 
+
+# Get path to products.json, read the file into a string,
+# and transform the string into a usable hash 
 def setup_files
 	path = File.join(File.dirname(__FILE__), '../data/products.json')
 	file = File.read(path)
-	$toys_data = JSON.parse(file)
-	$report_file = File.new("report.txt", "w+")
+	toys_data = JSON.parse(file)
+	report_file = File.new("report.txt", "w+")
 end
 
-puts"  /$$$$$$            /$$                           /$$$$$$$                                            /$$ "   
-puts" /$$__  $$          | $$                          | $$__  $$                                          | $$  "  
-puts"| $$  \__/  /$$$$$$ | $$  /$$$$$$   /$$$$$$$      | $$  \ $$  /$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$  "
-puts"|  $$$$$$  |____  $$| $$ /$$__  $$ /$$_____/      | $$$$$$$/ /$$__  $$ /$$__  $$ /$$__  $$ /$$__  $$|_  $$_/  "
-puts" \____  $$  /$$$$$$$| $$| $$$$$$$$|  $$$$$$       | $$__  $$| $$$$$$$$| $$  \ $$| $$  \ $$| $$  \__/  | $$    "
-puts" /$$  \ $$ /$$__  $$| $$| $$_____/ \____  $$      | $$  \ $$| $$_____/| $$  | $$| $$  | $$| $$        | $$ /$$"
-puts"|  $$$$$$/|  $$$$$$$| $$|  $$$$$$$ /$$$$$$$/      | $$  | $$|  $$$$$$$| $$$$$$$/|  $$$$$$/| $$        |  $$$$/"
-puts" \______/  \_______/|__/ \_______/|_______/       |__/  |__/ \_______/| $$____/  \______/ |__/         \___/  "
-puts"                                                                      | $$                                    "
-puts"                                                                      | $$                                    "
-puts"                                                                      |__/                                    "
 
+def ascii_art_header(header_name)
+	header_ascii = Artii::Base.new
+	puts header_ascii.asciify(header_name)
+end
 
-
-
-
-
+setup_files
+# Print "Sales Report" in ascii art
 
 puts "                     _            _       "
 puts "                    | |          | |      "
@@ -106,9 +100,9 @@ unique_brands = toys_data["items"].map { |item| item["brand"] }.uniq
 
 
 
-# Print "Sales Report" in ascii art
 
-# Print today's date
+
+
 
 # Print "Products" in ascii art
 
