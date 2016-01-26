@@ -1,13 +1,37 @@
 require 'json'
-path = File.join(File.dirname(__FILE__), '../data/products.json')
-file = File.read(path)
-toys_data = JSON.parse(file)
-puts toys_data.class
+
+
+
 # Print today's date
 require 'date'
 current_time = DateTime.now
 date_today = current_time.strftime "%d/%m/%Y"
 puts "Today's date is: " + date_today 
+ 
+def setup_files
+	path = File.join(File.dirname(__FILE__), '../data/products.json')
+	file = File.read(path)
+	toys_data = JSON.parse(file)
+	report_file = File.new("report.txt", "w+")
+end
+
+puts"  /$$$$$$            /$$                           /$$$$$$$                                            /$$ "   
+puts" /$$__  $$          | $$                          | $$__  $$                                          | $$  "  
+puts"| $$  \__/  /$$$$$$ | $$  /$$$$$$   /$$$$$$$      | $$  \ $$  /$$$$$$   /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$  "
+puts"|  $$$$$$  |____  $$| $$ /$$__  $$ /$$_____/      | $$$$$$$/ /$$__  $$ /$$__  $$ /$$__  $$ /$$__  $$|_  $$_/  "
+puts" \____  $$  /$$$$$$$| $$| $$$$$$$$|  $$$$$$       | $$__  $$| $$$$$$$$| $$  \ $$| $$  \ $$| $$  \__/  | $$    "
+puts" /$$  \ $$ /$$__  $$| $$| $$_____/ \____  $$      | $$  \ $$| $$_____/| $$  | $$| $$  | $$| $$        | $$ /$$"
+puts"|  $$$$$$/|  $$$$$$$| $$|  $$$$$$$ /$$$$$$$/      | $$  | $$|  $$$$$$$| $$$$$$$/|  $$$$$$/| $$        |  $$$$/"
+puts" \______/  \_______/|__/ \_______/|_______/       |__/  |__/ \_______/| $$____/  \______/ |__/         \___/  "
+puts"                                                                      | $$                                    "
+puts"                                                                      | $$                                    "
+puts"                                                                      |__/                                    "
+
+
+
+
+
+
 
 puts "                     _            _       "
 puts "                    | |          | |      "
