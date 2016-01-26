@@ -1,42 +1,39 @@
 require 'json'
 require 'artii'
-
-
-
-# Print today's date
 require 'date'
-current_time = DateTime.now
-date_today = current_time.strftime "%d/%m/%Y"
-puts "Today's date is: " + date_today 
+
+
+
 
 # Get path to products.json, read the file into a string,
 # and transform the string into a usable hash 
 def setup_files
 	path = File.join(File.dirname(__FILE__), '../data/products.json')
 	file = File.read(path)
-	toys_data = JSON.parse(file)
-	report_file = File.new("report.txt", "w+")
+	$toys_data = JSON.parse(file)
+	$report_file = File.new("report.txt", "w+")
 end
 
-
+#Methof that creates ascii art headers
 def ascii_art_header(header_name)
 	header_ascii = Artii::Base.new
 	puts header_ascii.asciify(header_name)
 end
 
-setup_files
-# Print "Sales Report" in ascii art
+# Print "sales seport" in ascii art
+ascii_art_header("sales report")
 
-puts "                     _            _       "
-puts "                    | |          | |      "
-puts " _ __  _ __ ___   __| |_   _  ___| |_ ___ "
-puts "| '_ \\| '__/ _ \\ / _` | | | |/ __| __/ __|"
-puts "| |_) | | | (_) | (_| | |_| | (__| |_\\__ \\"
-puts "| .__/|_|  \\___/ \\__,_|\\__,_|\\___|\\__|___/"
-puts "| |                                       "
-puts "|_|                                       "
- 
-  toys_data["items"].each { |toy| 
+# Print today's date
+current_time = DateTime.now
+date_today = current_time.strftime "%d/%m/%Y"
+puts "Today's date is: " + date_today 
+
+# Print "products" in ascii art
+ascii_art_header("products")
+
+setup_files
+
+$toys_data["items"].each { |toy| 
     puts toy["title"] #prints name of the toy
     puts "**************************************"   #Saperator
     puts "The retail price : " + toy["full-price"].to_s + " USD" #prints retail price of the toy
@@ -62,20 +59,15 @@ puts "|_|                                       "
   
 
 
-  puts " _                         _     "
-  puts "| |                       | |    "
-  puts "| |__  _ __ __ _ _ __   __| |___ "
-  puts "| '_ \\| '__/ _` | '_ \\ / _` / __|"
-  puts "| |_) | | | (_| | | | | (_| \\__ \\"
-  puts "|_.__/|_|  \\__,_|_| |_|\\__,_|___/"
-  puts
+# Print "brands" in ascii art
+ascii_art_header("brands")
 
-unique_brands = toys_data["items"].map { |item| item["brand"] }.uniq
+unique_brands = $toys_data["items"].map { |item| item["brand"] }.uniq
   unique_brands.each_with_index { |brand, index|
     puts " "
     puts brand #prints the name of the brand
     puts "**************************************"   #Saperator
-      brand_toys = toys_data["items"].select { |item| item["brand"] == brand }
+      brand_toys = $toys_data["items"].select { |item| item["brand"] == brand }
 
       total_stock_brand = 0
       full_actual_price = 0
@@ -104,7 +96,7 @@ unique_brands = toys_data["items"].map { |item| item["brand"] }.uniq
 
 
 
-# Print "Products" in ascii art
+
 
 # For each product in the data set:
 	# Print the name of the toy
