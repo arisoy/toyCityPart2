@@ -105,3 +105,4 @@ def create_report
 end
 
 create_report
+File.open("out.txt", 'w+') {|f| f.write("write your stuff here") }
