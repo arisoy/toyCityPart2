@@ -26,7 +26,9 @@ def create_report
 		puts "Today's date is: " + date_today 
 	end
 
-		setup_files
+	setup_files
+
+	#Method includes report products
 	def report_products
 	$toys_data["items"].each { |toy| 
 	    puts toy["title"] #prints name of the toy
@@ -51,32 +53,34 @@ def create_report
 
 	    puts "                                      " #Empty Line
 	    }
-	  end
-	 	def report_brands
+	end
+
+	#Method includes report brands
+	def report_brands
 	unique_brands = $toys_data["items"].map { |item| item["brand"] }.uniq
 	  unique_brands.each_with_index { |brand, index|
 	    puts " "
 	    puts brand #prints the name of the brand
 	    puts "**************************************"   #Saperator
-	      brand_toys = $toys_data["items"].select { |item| item["brand"] == brand }
+	    brand_toys = $toys_data["items"].select { |item| item["brand"] == brand }
 
-	      total_stock_brand = 0
-	      full_actual_price = 0
-	      brand_purchases = 0
-	      brand_sales = 0
+	    total_stock_brand = 0
+	    full_actual_price = 0
+	    brand_purchases = 0
+	    brand_sales = 0
 
-	      brand_toys.each { |toy| total_stock_brand += toy["stock"].to_i } #counts stock for each brand
-	      brand_toys.each { |item| brand_purchases += item["purchases"].length.to_i }
-	      brand_toys.each { |item| 
-	        item["purchases"].each { |el| brand_sales+= el["price"].to_f
+	    brand_toys.each { |toy| total_stock_brand += toy["stock"].to_i } #counts stock for each brand
+	    brand_toys.each { |item| brand_purchases += item["purchases"].length.to_i }
+	    brand_toys.each { |item| 
+	    item["purchases"].each { |el| brand_sales+= el["price"].to_f
 	        }
 	      }
-	      brand_toys.each { |item| full_actual_price += (item["full-price"].to_f) }
-	      puts "Total Stock         : #{total_stock_brand}"
-	      puts "Total Revenue       : #{brand_sales.round(2)} USD"
-	      average_brand_price = (brand_sales / brand_purchases)
-	      average_brand_disc = (1 - brand_sales / (full_actual_price*2).to_f)
-	      puts "Average Brand Price : #{average_brand_price.round(2)} USD"
+	    brand_toys.each { |item| full_actual_price += (item["full-price"].to_f) }
+	    puts "Total Stock         : #{total_stock_brand}"
+	    puts "Total Revenue       : #{brand_sales.round(2)} USD"
+	    average_brand_price = (brand_sales / brand_purchases)
+	    average_brand_disc = (1 - brand_sales / (full_actual_price*2).to_f)
+	    puts "Average Brand Price : #{average_brand_price.round(2)} USD"
 	}
 	end
 
@@ -97,14 +101,7 @@ def create_report
 	
 	#prints brands part of the report
 	report_brands
-
+	
 end
 
 create_report
-  
-      
-
-
-
-
-
