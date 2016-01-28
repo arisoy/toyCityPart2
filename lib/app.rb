@@ -105,4 +105,8 @@ def create_report
 end
 
 create_report
-File.open("out.txt", 'w+') {|f| f.write("write your stuff here") }
+
+fname = "sample.txt"
+somefile = File.open(fname, "w")
+somefile.puts "Hello file!"
+somefile.close
