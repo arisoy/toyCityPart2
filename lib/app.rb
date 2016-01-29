@@ -33,12 +33,12 @@ def create_report
 	$toys_data["items"].each { |toy| 
 	    puts toy["title"] #prints name of the toy
 	    puts "**************************************"   #Saperator
-	    puts "The retail price : " + toy["full-price"].to_s + " USD" #prints retail price of the toy
+	    puts "The retail price : #{toy["full-price"].to_s} USD" #prints retail price of the toy
 	    puts "Total Purchases  : #{toy["purchases"].length.to_i}" #prints total number of purchases
 	    
 	    total_amount = 0    # Calculates and prints the total amount of sales
 	    toy["purchases"].each { |purchase|
-	    total_amount += purchase["price"].to_f
+	    	total_amount += purchase["price"].to_f
 	    }
 	    puts "Total Sales      : #{total_amount} USD"
 
@@ -46,9 +46,10 @@ def create_report
 	    toy["purchases"].each { |purchase|
 	      total_amount += purchase["price"].to_f
 	    }
-	    puts "Average Price    : #{total_amount/toy["purchases"].length} USD" 
+	    avg_price = total_amount/toy["purchases"].length
+	    puts "Average Price    : #{avg_price} USD" 
 
-	    puts "Average Discount : #{toy["full-price"].to_f.round(2) - total_amount.round(2)/toy["purchases"].length.round(2)} USD"
+	    puts "Average Discount : #{sprintf '%.2f', (toy["full-price"].to_f - avg_price)} USD"
 	    
 
 	    puts "                                      " #Empty Line
@@ -58,7 +59,7 @@ def create_report
 	#Method includes report brands
 	def report_brands
 	unique_brands = $toys_data["items"].map { |item| item["brand"] }.uniq
-	  unique_brands.each_with_index { |brand, index|
+	  unique_brands.each { |brand, index|
 	    puts " "
 	    puts brand #prints the name of the brand
 	    puts "**************************************"   #Saperator
