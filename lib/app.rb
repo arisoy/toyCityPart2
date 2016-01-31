@@ -102,14 +102,18 @@ def create_report
 	
 	#prints brands part of the report
 	report_brands
-	
-	
-end
 
+end
 
 File.open("report.txt", "w+") do |line|
-	line.puts create_report
-end
+		line.puts create_report
+		
+
+end 
+
+
+
+
 
 
 
