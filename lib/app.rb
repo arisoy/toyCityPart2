@@ -1,5 +1,5 @@
 require 'json'
-require 'artii'
+require 'artii' #gem needs to be installed
 require 'date'
 
 # Get path to products.json, read the file into a string,
@@ -9,6 +9,7 @@ def setup_files
 	file = File.read(path)
 	$toys_data = JSON.parse(file)
 	$report_file = File.new("report.txt", "w+")
+
 end
 
 def create_report
@@ -102,6 +103,19 @@ def create_report
 	#prints brands part of the report
 	report_brands
 	
+	
 end
 
-create_report
+
+File.open("report.txt", "w+") do |line|
+	line.puts create_report
+end
+
+
+
+
+
+
+
+
+
