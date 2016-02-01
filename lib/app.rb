@@ -6,7 +6,7 @@ require 'date'
 # and transform the string into a usable hash
 
 
-report_strings = []
+$report_strings = []
 
 
 def setup_files
@@ -51,7 +51,7 @@ def print_ascii_art_header(header_name)
     
     art_header_string = header_ascii.asciify(header_name)
     puts art_header_string
-    report_strings.push(art_header_string)
+    $report_strings.push(art_header_string)
 end
 
 #Method prints current date
@@ -124,9 +124,10 @@ create_report
 
 File.open("report.txt", "w+") do |line|
     
-    
-    
-		line.puts create_report
+    $report_strings.each { |report_line|
+        
+        line.puts report_line
+    }
 		
 end 
 
