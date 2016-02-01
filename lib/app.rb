@@ -3,7 +3,12 @@ require 'artii' #gem needs to be installed
 require 'date'
 
 # Get path to products.json, read the file into a string,
-# and transform the string into a usable hash 
+# and transform the string into a usable hash
+
+
+report_strings = []
+
+
 def setup_files
 	path = File.join(File.dirname(__FILE__), '../data/products.json')
 	file = File.read(path)
@@ -31,12 +36,22 @@ def create_report
 	
 	#prints brands part of the report
 	report_brands
+    
+    
+    
+    
 
 end
+
+
+
 #Method that creates ascii art headers
 def print_ascii_art_header(header_name)
     header_ascii = Artii::Base.new
-    puts header_ascii.asciify(header_name)
+    
+    art_header_string = header_ascii.asciify(header_name)
+    puts art_header_string
+    report_strings.push(art_header_string)
 end
 
 #Method prints current date
@@ -46,7 +61,6 @@ def print_date
     puts "Today's date is: " + date_today
 end
 
-setup_files
 
 #Method includes report products
 def report_products
@@ -104,7 +118,14 @@ def report_brands
     }
 end
 
+setup_files
+
+create_report
+
 File.open("report.txt", "w+") do |line|
+    
+    
+    
 		line.puts create_report
 		
 end 
